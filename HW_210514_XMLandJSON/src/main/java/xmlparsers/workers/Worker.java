@@ -1,8 +1,19 @@
 package xmlparsers.workers;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "worker")
 public class Worker {
-    private final String name, surname, position, department;
-    private final int experience;
+    private String name, surname, position, department;
+    private int experience;
+
+    public Worker() {
+        name = null;
+        surname = null;
+        position = null;
+        department = null;
+        experience = 0;
+    }
 
     public Worker(String name, String surname, String position, String department, int experience) {
         this.name = name;
@@ -32,14 +43,39 @@ public class Worker {
         return experience;
     }
 
+    @XmlElement(name = "name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @XmlElement(name = "surname")
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    @XmlElement(name = "position")
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    @XmlElement(name = "department")
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    @XmlElement(name = "experience")
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
     @Override
     public String toString() {
-        return "Worker{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", position='" + position + '\'' +
-                ", department='" + department + '\'' +
-                ", experience=" + experience +
-                '}';
+        return "Работник{" +
+                "Имя - '" + name + '\'' +
+                ", Фамилия - '" + surname + '\'' +
+                ", Должность - '" + position + '\'' +
+                ", Отделение - '" + department + '\'' +
+                ", Стаж работы " + experience +
+                " лет}";
     }
 }

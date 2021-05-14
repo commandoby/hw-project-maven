@@ -1,10 +1,13 @@
 package xmlparsers.workers;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.*;
 
+@XmlRootElement(name = "medicalWorkers")
 public class MedicalWorkers {
     private String hospitalName;
     private String hospitalAddress;
+    @XmlElement(name = "worker")
     ArrayList<Worker> workers;
 
     public MedicalWorkers() {
@@ -35,10 +38,12 @@ public class MedicalWorkers {
         return workers;
     }
 
+    @XmlElement(name = "hospitalName")
     public void setHospitalName(String hospitalName) {
         this.hospitalName = hospitalName;
     }
 
+    @XmlElement(name = "hospitalAddress")
     public void setHospitalAddress(String hospitalAddress) {
         this.hospitalAddress = hospitalAddress;
     }
@@ -49,9 +54,9 @@ public class MedicalWorkers {
 
     @Override
     public String toString() {
-        String text = "MedicalWorkers{" +
-                "hospitalName='" + hospitalName + '\'' +
-                ", hospitalAddress='" + hospitalAddress + '\'' +
+        String text = "Работники больницы{" +
+                "Больница - '" + hospitalName + '\'' +
+                ", адрес - '" + hospitalAddress + '\'' +
                 '}';
         StringBuilder builder = new StringBuilder();
         builder.append(text);

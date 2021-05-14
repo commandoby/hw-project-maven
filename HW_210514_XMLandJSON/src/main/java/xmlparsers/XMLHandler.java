@@ -1,10 +1,15 @@
 package xmlparsers;
 
+import Exceptions.WrongTagException;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import xmlparsers.workers.MedicalWorkers;
 import xmlparsers.workers.Worker;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 public class XMLHandler extends DefaultHandler {
     MedicalWorkers medicalWorkers;
@@ -23,13 +28,20 @@ public class XMLHandler extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         String text = new String(ch, start, length).trim();
-        if (lastName.equals("hospitalName")) hospitalName = text;
-        if (lastName.equals("hospitalAddress")) hospitalAddress = text;
-        if (lastName.equals("name")) name = text;
-        if (lastName.equals("surname")) surname = text;
-        if (lastName.equals("position")) position = text;
-        if (lastName.equals("department")) department = text;
-        if (lastName.equals("experience")) experience = Integer.valueOf(text);
+        try {
+            switch (lastName) {
+                case "hospitalName" -> hospitalName = text;
+                case "hospitalAddress" -> hospitalAddress = text;
+                case "name" -> name = text;
+                case "surname" -> surname = text;
+                case "position" -> position = text;
+                case "department" -> department = text;
+                case "experience" -> experience = Integer.valueOf(text);
+                default -> throw new WrongTagException("Неверный тег: " + lastName);
+            }
+        } catch (WrongTagException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
