@@ -1,9 +1,8 @@
 import Exceptions.WrongCommandException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jackson.JsonReader;
 import org.xml.sax.SAXException;
 import xmlparsers.*;
-import xmlparsers.jaxb.JAXBParser;
+import jaxb.JAXBParser;
 import xmlparsers.workers.MedicalWorkers;
 import xmlparsers.workers.Worker;
 
@@ -46,7 +45,7 @@ public class Application {
                         medicalWorkers = new MedicalWorkers();
                         XMLHandler handler = new XMLHandler(medicalWorkers);
                         parser.parse(new File(ADDRESS), handler);
-                        System.out.println(medicalWorkers.toString());
+                        System.out.println(medicalWorkers);
                         break;
                     case "stax":
                         medicalWorkers = new MedicalWorkers();
@@ -56,25 +55,19 @@ public class Application {
                         } catch (XMLStreamException e) {
                             e.printStackTrace();
                         }
-                        System.out.println(medicalWorkers.toString());
+                        System.out.println(medicalWorkers);
                         break;
                     case "dom":
                         medicalWorkers = new MedicalWorkers();
                         DOMParser domParser = new DOMParser(new File(ADDRESS), medicalWorkers);
                         domParser.read();
-                        System.out.println(medicalWorkers.toString());
+                        System.out.println(medicalWorkers);
                         break;
                     case "jaxb":
-                        JAXBParser jaxbParser = new JAXBParser();
-                        medicalWorkers = jaxbParser.read(new File(ADDRESS));
-                        System.out.println(medicalWorkers.toString());
+                        medicalWorkers = jaxb(medicalWorkers);
                         break;
                     case "json":
-                        if (medicalWorkers != null) {
-                            json(medicalWorkers, new File(JSONADDRESS));
-                        } else {
-                            System.out.println("Прочтите список работников больницы!");
-                        }
+                        json(medicalWorkers);
                         break;
                     case "readworker":
                         if (medicalWorkers != null) {
@@ -96,40 +89,71 @@ public class Application {
         }
     }
 
-    static void json(MedicalWorkers medicalWorkers, File file) {
+    static MedicalWorkers jaxb(MedicalWorkers medicalWorkers) throws JAXBException {
+        boolean active = true;
+        Scanner scanner = new Scanner(System.in);
+        String command;
+        JAXBParser jaxbParser = new JAXBParser();
+        while (active) {
+            System.out.print("Введинте комманду (read, write, newread, end): ");
+            command = scanner.nextLine();
+            try {
+                switch (command) {
+                    case "end" -> active = false;
+                    case "write" -> jaxbParser.write(new File(NEWADDRESS), medicalWorkers);
+                    case "read" -> {
+                        medicalWorkers = jaxbParser.read(new File(ADDRESS));
+                        System.out.println(medicalWorkers);
+                    }
+                    case "newread" -> {
+                        medicalWorkers = jaxbParser.read(new File(NEWADDRESS));
+                        System.out.println(medicalWorkers);
+                    }
+                    default -> throw new WrongCommandException("Неверная команда: " + command);
+                }
+            } catch (WrongCommandException | IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return medicalWorkers;
+    }
+
+    static MedicalWorkers json(MedicalWorkers medicalWorkers) {
         boolean active = true;
         Scanner scanner = new Scanner(System.in);
         String command;
         JsonReader<MedicalWorkers> jsonReader = new JsonReader<>();
         while (active) {
-            System.out.print("Введинте комманду (read, write, exit): ");
+            System.out.print("Введинте комманду (read, write, end): ");
             command = scanner.nextLine();
             try {
                 switch (command) {
-                    case "exit":
-                        active = false;
-                        break;
-                    case "write":
-                        jsonReader.write(medicalWorkers, new File(JSONADDRESS));
-                        break;
-                    case "read":
+                    case "end" -> active = false;
+                    case "write" -> {
+                        if (medicalWorkers != null) {
+                            jsonReader.write(medicalWorkers, new File(JSONADDRESS));
+                        } else {
+                            System.out.println("Сперва прочтите список работников больницы!");
+                        }
+                    }
+                    case "read" -> {
                         MedicalWorkers newMedicalWorkers = jsonReader.read(new File(JSONADDRESS), MedicalWorkers.class);
-                        System.out.println(newMedicalWorkers.toString());
-                        break;
-                    default:
-                        throw new WrongCommandException("Неверная команда: " + command);
+                        System.out.println(newMedicalWorkers);
+                    }
+                    default -> throw new WrongCommandException("Неверная команда: " + command);
                 }
-            } catch (WrongCommandException | IOException e) {
+            } catch (WrongCommandException | IOException | IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
+        return medicalWorkers;
     }
 
     static void readWorker(ArrayList<Worker> workers, String name, String surname) {
         List<Worker> workerList = workers.stream().filter(worker -> worker.getName().equals(name))
                 .filter(worker -> worker.getSurname().equals(surname)).collect(Collectors.toList());
         if (!workerList.isEmpty()) {
-            for (Worker w : workerList) System.out.println(w.toString());
+            for (Worker w : workerList) System.out.println(w);
         } else {
             System.out.println("Работник отсутствует.");
         }

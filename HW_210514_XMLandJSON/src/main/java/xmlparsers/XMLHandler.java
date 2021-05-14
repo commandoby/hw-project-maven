@@ -7,10 +7,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import xmlparsers.workers.MedicalWorkers;
 import xmlparsers.workers.Worker;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
 public class XMLHandler extends DefaultHandler {
     MedicalWorkers medicalWorkers;
     private String lastName, hospitalName, hospitalAddress, name, surname, position, department;
@@ -21,12 +17,12 @@ public class XMLHandler extends DefaultHandler {
     }
 
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes) {
         lastName = qName;
     }
 
     @Override
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) {
         String text = new String(ch, start, length).trim();
         try {
             switch (lastName) {
