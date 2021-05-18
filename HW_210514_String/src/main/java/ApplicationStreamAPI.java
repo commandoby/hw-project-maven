@@ -79,15 +79,9 @@ public class ApplicationStreamAPI {
     }
 
     static String isHttp(String link) {
-        Pattern patternFirst = Pattern.compile("http://");
-        Pattern patternSecond = Pattern.compile("https://");
-        Matcher matcher = patternFirst.matcher(link);
-        if (matcher.find()) {
-            if (matcher.start() == 0) return "Ссылка верна.";
-        }
-        matcher = patternSecond.matcher(link);
-        if (matcher.find()) {
-            if (matcher.start() == 0) return "Ссылка верна.";
+        Pattern pattern = Pattern.compile("\\s*https?://.{2,}\\.(com|ru|by)/?");
+        if (link.matches(pattern.pattern())) {
+            return "Ссылка верна.";
         }
         return "Ссылка не верна.";
     }
