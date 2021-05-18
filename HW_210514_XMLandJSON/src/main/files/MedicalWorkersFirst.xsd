@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mw:schema xmlns:mw="http://www.w3.org/2001/XMLSchema">
+    <mw:element name="medicalWorkers">
+        <mw:complexType>
+            <mw:sequence>
+                <mw:element name="hospitalName" type="mw:string"/>
+                <mw:element name="hospitalAddress" type="mw:string"/>
+                <mw:element name="worker" maxOccurs="unbounded">
+                    <mw:complexType>
+                        <mw:sequence>
+                            <mw:element name="name" type="mw:string"/>
+                            <mw:element name="surname" type="mw:string"/>
+                            <mw:element name="position" type="mw:string"/>
+                            <mw:element name="department" type="mw:string"/>
+                            <mw:element name="experience" type="mw:integer"/>
+                        </mw:sequence>
+                        <mw:attribute name="id" type="mw:string" use="required"/>
+                    </mw:complexType>
+                </mw:element>
+            </mw:sequence>
+        </mw:complexType>
+    </mw:element>
+</mw:schema>

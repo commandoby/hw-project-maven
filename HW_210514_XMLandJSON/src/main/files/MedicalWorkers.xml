@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE medicalWorkers [
+        <!ELEMENT medicalWorkers (hospitalName, hospitalAddress, worker+)>
+        <!ELEMENT hospitalName (#PCDATA)>
+        <!ELEMENT hospitalAddress (#PCDATA)>
+        <!ELEMENT worker (name, surname, position, department, experience)>
+        <!ELEMENT name (#PCDATA)>
+        <!ELEMENT surname (#PCDATA)>
+        <!ELEMENT position (#PCDATA)>
+        <!ELEMENT department (#PCDATA)>
+        <!ELEMENT experience (#PCDATA)>
+        <!ATTLIST worker id CDATA #REQUIRED>
+        ]>
+
+<!-- Медицинские работники -->
+<medicalWorkers>
+    <hospitalName>Central City Hospital</hospitalName>
+    <hospitalAddress>Pinsk city, Pervomayskaya street 20</hospitalAddress>
+    <worker id="0001">
+        <name>Ivan</name>
+        <surname>Ivanov</surname>
+        <position>doctor</position>
+        <department>surgery</department>
+        <experience>5</experience>
+    </worker>
+    <worker id="0002">
+        <name>Petr</name>
+        <surname>Petrov</surname>
+        <position>therapist</position>
+        <department>therapeutic department</department>
+        <experience>6</experience>
+    </worker>
+    <worker id="0003">
+        <name>Svetlana</name>
+        <surname>Sidorova</surname>
+        <position>doctor</position>
+        <department>surgery</department>
+        <experience>12</experience>
+    </worker>
+    <worker id="0004">
+        <name>Polina</name>
+        <surname>Petrova</surname>
+        <position>nurse</position>
+        <department>surgery</department>
+        <experience>4</experience>
+    </worker>
+    <worker id="0005">
+        <name>Sidor</name>
+        <surname>Sidorov</surname>
+        <position>cleaner</position>
+        <department>hospital</department>
+        <experience>7</experience>
+    </worker>
+</medicalWorkers>

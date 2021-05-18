@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mw:schema xmlns:mw="http://www.w3.org/2001/XMLSchema">
+    <mw:simpleType name="stringType">
+        <mw:restriction base="mw:string"/>
+    </mw:simpleType>
+
+    <mw:simpleType name="intType">
+        <mw:restriction base="mw:positiveInteger"/>
+    </mw:simpleType>
+
+    <mw:simpleType name="workerIdType">
+        <mw:restriction base="mw:string">
+            <mw:pattern value="[0-9]{4}"/>
+        </mw:restriction>
+    </mw:simpleType>
+
+    <mw:complexType name="workerType">
+        <mw:sequence>
+            <mw:element name="name" type="stringType"/>
+            <mw:element name="surname" type="stringType"/>
+            <mw:element name="position" type="stringType"/>
+            <mw:element name="department" type="stringType"/>
+            <mw:element name="experience" type="intType"/>
+        </mw:sequence>
+        <mw:attribute name="id" type="workerIdType" use="required"/>
+    </mw:complexType>
+
+    <mw:complexType name="medicalWorkersType">
+        <mw:sequence>
+            <mw:element name="hospitalName" type="stringType"/>
+            <mw:element name="hospitalAddress" type="stringType"/>
+            <mw:element name="worker" type="workerType" maxOccurs="unbounded"/>
+        </mw:sequence>
+    </mw:complexType>
+
+    <mw:element name="medicalWorkers" type="medicalWorkersType"/>
+</mw:schema>
