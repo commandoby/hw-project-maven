@@ -9,7 +9,7 @@ public class Utils {
     private static final String USERNAME = "commandoby";
     private static final String USERPASSWORD = "";
 
-    public static Connection getConnection () {
+    public static Connection getConnection() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL, USERNAME, USERPASSWORD);

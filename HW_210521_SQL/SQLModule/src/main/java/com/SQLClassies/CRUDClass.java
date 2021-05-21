@@ -36,8 +36,8 @@ public class CRUDClass {
                 workers.add(new Worker(rs.getInt(1), rs.getString(2), rs.getString(3),
                         rs.getString(4), rs.getString(5), rs.getInt(6)));
             }
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return workers;
     }
@@ -52,8 +52,8 @@ public class CRUDClass {
                 workers.add(new Worker(rs.getInt(1), rs.getString(2), rs.getString(3),
                         rs.getString(4), rs.getString(5), rs.getInt(6)));
             }
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return workers;
     }
@@ -75,12 +75,12 @@ public class CRUDClass {
             ps.setInt(1, newID);
             ps.setString(2, name);
             ps.setString(3, surname);
-            ps.setString(4,position);
+            ps.setString(4, position);
             ps.setString(5, department);
             ps.setInt(6, years);
-            int a = ps.executeUpdate();
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -89,8 +89,8 @@ public class CRUDClass {
             ps.setString(1, newPosition);
             ps.setInt(2, id);
             ps.executeUpdate();
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -99,8 +99,8 @@ public class CRUDClass {
             ps.setString(1, newDepartment);
             ps.setInt(2, id);
             ps.executeUpdate();
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -109,8 +109,8 @@ public class CRUDClass {
             ps.setInt(1, newYears);
             ps.setInt(2, id);
             ps.executeUpdate();
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -118,8 +118,8 @@ public class CRUDClass {
         try (PreparedStatement ps = connection.prepareStatement(DELETE_WORKER)) {
             ps.setInt(1, id);
             ps.execute();
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -127,8 +127,8 @@ public class CRUDClass {
         try {
             connection.commit();
             connection.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

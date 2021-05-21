@@ -38,7 +38,7 @@ public class Application {
         }
     }
 
-    static String action (String command) throws WrongCommandException {
+    static String action(String command) throws WrongCommandException {
         Pattern pattern = Pattern.compile("\\s*(get|insert|update position|" +
                 "update department|update years|delete|help|exit)\\s*.*");
         if (!command.matches(pattern.pattern())) return "Невеная команда.";
@@ -51,7 +51,7 @@ public class Application {
             case "help":
                 return """
                         Доступные команды:
-                        Получить всех медработников: get
+                        Получить всех работников: get
                         Получить всех работников и отсортировать: get id/name/surname/position/department/years
                         Получить конкретного работника: get <имя> <фамилия>
                         Добавить работника: insert <имя> <фамилия> <должность> <отделение> <возраст>
@@ -69,7 +69,6 @@ public class Application {
                             splitCommand[4], Integer.parseInt(splitCommand[5]));
                     return "Работник " + splitCommand[1] + " " + splitCommand[2] + " добавлен.";
                 } else {
-                    //return "Ошибка добавления работника.";
                     throw new WrongCommandException("Ошибка добавления работника.");
                 }
             case "update":
@@ -86,14 +85,12 @@ public class Application {
                             return "Работнику с id " + splitCommand[2] + " обновлен возраст.";
                     }
                 } else {
-                    //return "Ошибка изменения работника.";
                     throw new WrongCommandException("Ошибка изменения работника.");
                 }
             case "delete":
                 CRUDClass.deleteWorker(Integer.parseInt(splitCommand[1]));
                 return "Работник с id " + splitCommand[1] + " удалён.";
         }
-        //return "Что-то пошло не так.";
         throw new WrongCommandException("Что-то пошло не так.");
     }
 
@@ -127,7 +124,6 @@ public class Application {
                     return "Вот найденные совпадения.";
                 }
         }
-        //return "Что-то пошло не так c получением работников.";
         throw new WrongCommandException("Что-то пошло не так c получением работников.");
     }
 
