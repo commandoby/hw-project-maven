@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CRUDClass {
+public class CRUDUtil {
     private static final String GET_ID = "SELECT id FROM medicalWorkers ORDER BY id";
     private static final String GET_ALL = "SELECT * FROM medicalWorkers";
     private static final String GET_WORKER = "SELECT * FROM medicalWorkers WHERE name = ? AND surname = ?";
@@ -20,26 +20,35 @@ public class CRUDClass {
     private static Connection connection = Utils.getConnection();
 
     public static List<Worker> getAllWorkers(int type) {
-        String typeSort = GET_ALL;
-        switch (type) {
-            case 1 -> typeSort += " ORDER BY id";
-            case 2 -> typeSort += " ORDER BY name";
-            case 3 -> typeSort += " ORDER BY surname";
-            case 4 -> typeSort += " ORDER BY position";
-            case 5 -> typeSort += " ORDER BY department";
-            case 6 -> typeSort += " ORDER BY years";
-        }
+        String typeSort = GET_ALL + getSortingOrder(type);
         List<Worker> workers = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(typeSort)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                workers.add(new Worker(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getInt(6)));
+                int id = rs.getInt(1);
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                String position = rs.getString("position");
+                String department = rs.getString("department");
+                int years = rs.getInt("years");
+                workers.add(new Worker(id, name, surname, position, department, years));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return workers;
+    }
+
+    static String getSortingOrder(int type) {
+        switch (type) {
+            case 1: return " ORDER BY id";
+            case 2: return " ORDER BY name";
+            case 3: return " ORDER BY surname";
+            case 4: return " ORDER BY position";
+            case 5: return " ORDER BY department";
+            case 6: return " ORDER BY years";
+            default: return "";
+        }
     }
 
     public static List<Worker> getWorker(String name, String surname) {
@@ -49,8 +58,13 @@ public class CRUDClass {
             ps.setString(2, surname);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                workers.add(new Worker(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getInt(6)));
+                int id = rs.getInt("id");
+                String getName = rs.getString("name");
+                String getSurname = rs.getString("surname");
+                String position = rs.getString("position");
+                String department = rs.getString("department");
+                int years = rs.getInt("years");
+                workers.add(new Worker(id, getName, getSurname, position, department, years));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

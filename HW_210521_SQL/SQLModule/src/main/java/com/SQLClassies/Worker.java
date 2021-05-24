@@ -5,12 +5,6 @@ public class Worker {
     private int id, years;
 
     public Worker() {
-        id = 0;
-        name = null;
-        surname = null;
-        position = null;
-        department = null;
-        years = 0;
     }
 
     public Worker(int id, String name, String surname, String position, String department, int years) {
