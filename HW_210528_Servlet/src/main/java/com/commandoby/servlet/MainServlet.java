@@ -1,5 +1,7 @@
 package com.commandoby.servlet;
 
+import com.commandoby.calculator.Calculator;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class MainServlet extends HttpServlet {
 
@@ -31,12 +34,16 @@ public class MainServlet extends HttpServlet {
         String text = req.getParameter("command");
         resp.setContentType("text/html");
         RequestDispatcher dispatcher;
-        if (text == "" || text.isEmpty()) {
-            req.setAttribute("text", "empty");
-            dispatcher = req.getRequestDispatcher("ExceptionPage.jsp");
+        int sign = Calculator.signReader(text);
+        if (sign != 0) {
+            List<Integer> nums = Calculator.reader(text);
+            int result = Calculator.result(sign, nums.get(0), nums.get(1));
+            req.setAttribute("text", result);
+            req.setAttribute("signText", Calculator.SIGNNAME[sign] + " ");
+            dispatcher = req.getRequestDispatcher("Result.jsp");
         } else {
             req.setAttribute("text", text);
-            dispatcher = req.getRequestDispatcher("Result.jsp");
+            dispatcher = req.getRequestDispatcher("ExceptionPage.jsp");
         }
         dispatcher.forward(req, resp);
     }

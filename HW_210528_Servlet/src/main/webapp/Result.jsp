@@ -10,7 +10,7 @@
 </head>
 <body>
 <form method="get">
-    Result: ${text} <br/>
+    ${signText}result: ${text} <br/>
     <input type="submit" value="Calculator">
 </form>
 </body>
