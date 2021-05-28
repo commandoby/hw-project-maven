@@ -7,11 +7,16 @@
 <html>
 <head>
     <title>Exception</title>
+    <style>
+        p{color: red}
+    </style>
 </head>
 <body>
-<form method="get">
-    Exception: ${text} <br/>
-    <input type="submit" value="Calculator">
-</form>
+<div align="center">
+    <form method="get">
+        <p>Invalid formula: ${text} </p>
+        <input type="submit" value="Calculator">
+    </form>
+</div>
 </body>
 </html>

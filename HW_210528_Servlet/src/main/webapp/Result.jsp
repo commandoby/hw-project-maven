@@ -9,9 +9,11 @@
     <title>Result</title>
 </head>
 <body>
-<form method="get">
-    ${signText}result: ${text} <br/>
-    <input type="submit" value="Calculator">
-</form>
+<div align="center">
+    <form method="get">
+        ${signText}result: ${text} <br/>
+        <input type="submit" value="Calculator">
+    </form>
+</div>
 </body>
 </html>
