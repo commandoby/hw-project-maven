@@ -14,16 +14,6 @@ import java.util.List;
 public class MainServlet extends HttpServlet {
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-    }
-
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.service(req, resp);
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("calculator.html");
         requestDispatcher.forward(req, resp);

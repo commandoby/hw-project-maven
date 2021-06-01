@@ -1,15 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: commandoby
-  Date: 23.05.2021
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Exception</title>
-    <style>
-        p{color: red}
-    </style>
+    <link href="CSSFiles/exaptionStyle.css" rel="stylesheet">
 </head>
 <body>
 <div align="center">
