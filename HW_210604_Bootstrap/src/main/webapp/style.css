@@ -1,0 +1,14 @@
+label {
+    font-family: Arial;
+    font-weight: bold;
+    font-style: italic;
+    color: blue;
+}
+
+input[type=submit] {
+    background-color: green;
+}
+
+input {
+    background-color: gray;
+}
