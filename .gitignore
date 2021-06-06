@@ -13,3 +13,7 @@ sample/
 # Maven files
 pom.xml
 *.iml
+
+# Other files
+.jpeg
+.png
