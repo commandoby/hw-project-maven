@@ -5,14 +5,12 @@ import com.commandoby.sonyShop.enums.RequestParamEnum;
 import com.commandoby.sonyShop.exceptions.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-public class SignInCommandImpl implements BaseCommand {
+public class ProductListPageCommandImpl implements BaseCommand {
     @Override
     public String execute(HttpServletRequest servletRequest) throws CommandException {
-        HttpSession session = servletRequest.getSession();
-        session.setAttribute(RequestParamEnum.LOGIN.getValue(), "");
-        session.setAttribute(RequestParamEnum.PASSWORD.getValue(), "");
-        return PagesPathEnum.SIGN_IN_PAGE.getPath();
+        String categoryName = servletRequest.getParameter(RequestParamEnum.CATEGORY.getValue());
+        servletRequest.setAttribute(RequestParamEnum.CATEGORY.getValue(), categoryName);
+        return PagesPathEnum.PRODUCTS_LIST_PAGE.getPath();
     }
 }

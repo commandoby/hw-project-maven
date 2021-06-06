@@ -17,7 +17,7 @@
         <h2>Login form with validation</h2>
         <p>Please, enter your credentials</p>
         <form method="post" class="needs-validation" novalidate>
-            <input type="hidden" name="command" value="sign-in"/>
+            <input type="hidden" name="command" value="home_page"/>
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control w-25" id="username" placeholder="Enter username" name="username"

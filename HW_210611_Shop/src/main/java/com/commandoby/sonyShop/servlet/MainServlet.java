@@ -4,7 +4,6 @@ import com.commandoby.sonyShop.commands.BaseCommand;
 import com.commandoby.sonyShop.commands.CommandFactory;
 import com.commandoby.sonyShop.enums.PagesPathEnum;
 import com.commandoby.sonyShop.exceptions.CommandException;
-import com.commandoby.sonyShop.exceptions.RequestParamNullException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,9 +32,6 @@ public class MainServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
             requestDispatcher.forward(req, resp);
         } catch (CommandException e) {
-            System.out.println(e);
-            req.getRequestDispatcher("pages/" + PagesPathEnum.SIGN_IN_PAGE.getPath()).forward(req, resp);
-        } catch (RequestParamNullException e) {
             System.out.println(e);
             req.getRequestDispatcher("pages/" + PagesPathEnum.SIGN_IN_PAGE.getPath()).forward(req, resp);
         }

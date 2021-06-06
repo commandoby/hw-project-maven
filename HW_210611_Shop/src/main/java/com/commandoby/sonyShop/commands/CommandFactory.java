@@ -13,10 +13,11 @@ public class CommandFactory {
     static {
         COMMAND_LIST.put(CommandsEnum.SIGN_IN_COMMAND.getCommand(), new SignInCommandImpl());
         COMMAND_LIST.put(CommandsEnum.HOME_PAGE_COMMAND.getCommand(), new HomePageCommandImpl());
+        COMMAND_LIST.put(CommandsEnum.PRODUCT_LIST_COMMAND.getCommand(), new ProductListPageCommandImpl());
     }
 
     public static BaseCommand defineCommand(HttpServletRequest servletRequest) {
-        String commandKey = servletRequest.getParameter(RequestParamEnum.COMMAND.toString());
+        String commandKey = servletRequest.getParameter(RequestParamEnum.COMMAND.getValue());
         if (commandKey == null || commandKey.isEmpty()) {
             commandKey = CommandsEnum.SIGN_IN_COMMAND.getCommand();
         }

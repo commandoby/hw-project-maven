@@ -31,8 +31,8 @@ public class Category {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Category that = (Category) o;
-        return Objects.equals(name, that.name) && Objects.equals(imageName, that.imageName);
+        Category category = (Category) o;
+        return Objects.equals(name, category.name) && Objects.equals(imageName, category.imageName);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Categories{" +
+        return "Category{" +
                 "name='" + name + '\'' +
                 ", imageName='" + imageName + '\'' +
                 '}';

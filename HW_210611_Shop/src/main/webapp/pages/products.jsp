@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Categories</title>
+    <title>Products list</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -13,33 +13,34 @@
 </head>
 <body>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<h2 align="center">Shop products of Sony.</h2>
+<h2 align="center">List products category: ${category_name}</h2>
 
 <form method="post">
     <div class="container" align="right">
+        <button type="submit" class="btn btn-primary btn-lg" name="command" value="home_page">Home page</button>
+        &nbsp
         <button type="submit" class="btn btn-primary btn-lg" name="command" value="basket">Basket</button>
         &nbsp
         <button type="submit" class="btn btn-danger btn-lg" name="command" value="sign-in">Escape</button>
     </div>
 
-    <div class="container" method="post" align="center">
+    <div class="container" method="post">
+        <input type="hidden" name="category_name" value="${category_name}"/>
         <br>
-        <c:if test="${not empty categories}">
-            <input type="hidden" name="command" value="product_list"/>
-            <div class="row">
-                <c:forEach items="${categories}" var="category">
-                    <button type="submit" class="btn btn-light" style="width:360px;height:260px"
-                            name="category_name" value="${category.getName()}">
-                        <div class="card-body">
-                            <h4 class="card-title">${category.getName()}</h4>
-                            <img class="card-img" style="height:160px"
-                                 src="${contextPath}/images/${category.getImageName()}" alt="Card image">
-                        </div>
-                    </button>
-                    &nbsp
-                </c:forEach>
+        <div class="media border">
+            <img class="card-img p-3" style="width:240px;height:160px" src="${contextPath}/images/tv.jpeg"
+                 alt="Card image">
+            <div class="media-body">
+                <h4><small>Njdfh awe ae gaer </small>&nbsp98984651</h4>
+                <p class="card-text">diuagweuvg;aisueva;weivua;eivha'eviha;sievu
+                    iseuvglisuegvisuevg;IUSevg;isugviuvg aiweu aiue aiu ef
+                    e; iauwefiuawe;iuf i;auef iuaefiu;iuehf;iuewfiu eiu ;aiu f;iu :EIUs ;iu ;ieufaiwuflerug re gal</p>
+                <button type="submit" class="btn btn-primary" name="command" value="product_list">
+                    Add to basket
+                </button>
             </div>
-        </c:if>
+        </div>
+        <br>
     </div>
 </form>
 </body>
