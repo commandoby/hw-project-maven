@@ -5,10 +5,12 @@ import java.util.Objects;
 public class Category {
     private String name;
     private String imageName;
+    private String tag;
 
-    public Category(String name, String imageName) {
+    public Category(String name, String imageName, String tag) {
         this.name = name;
         this.imageName = imageName;
+        this.tag = tag;
     }
 
     public String getName() {
@@ -27,17 +29,25 @@ public class Category {
         this.imageName = imageName;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(name, category.name) && Objects.equals(imageName, category.imageName);
+        return Objects.equals(name, category.name) && Objects.equals(imageName, category.imageName) && Objects.equals(tag, category.tag);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, imageName);
+        return Objects.hash(name, imageName, tag);
     }
 
     @Override
@@ -45,6 +55,7 @@ public class Category {
         return "Category{" +
                 "name='" + name + '\'' +
                 ", imageName='" + imageName + '\'' +
+                ", tag='" + tag + '\'' +
                 '}';
     }
 }

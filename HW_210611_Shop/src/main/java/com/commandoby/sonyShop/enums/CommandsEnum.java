@@ -4,7 +4,8 @@ public enum CommandsEnum {
     SIGN_IN_COMMAND("sign-in"),
     HOME_PAGE_COMMAND("home_page"),
     PRODUCT_LIST_COMMAND("product_list"),
-    BASKET_COMMAND("basket");
+    BASKET_COMMAND("basket"),
+    PAY_COMMAND("pay");
 
     private final String command;
 

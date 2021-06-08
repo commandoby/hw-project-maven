@@ -3,7 +3,8 @@ package com.commandoby.sonyShop.enums;
 public enum PagesPathEnum {
     HOME_PAGE("category.jsp"),
     SIGN_IN_PAGE("login.jsp"),
-    PRODUCTS_LIST_PAGE("products.jsp");
+    PRODUCTS_LIST_PAGE("products.jsp"),
+    BASKET_PAGE("basket.jsp");
 
     private final String path;
 

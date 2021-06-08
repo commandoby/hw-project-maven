@@ -35,6 +35,7 @@ public class HomePageCommandImpl implements BaseCommand {
         if (validateParamNotNull(login) && validateParamNotNull(password) && checkReceivedUser(user)) {
             session.setAttribute(RequestParamEnum.LOGIN.getValue(), login);
             session.setAttribute(RequestParamEnum.PASSWORD.getValue(), password);
+
             return categoryQuery(servletRequest);
         } else {
             return PagesPathEnum.SIGN_IN_PAGE.getPath();
@@ -43,7 +44,10 @@ public class HomePageCommandImpl implements BaseCommand {
 
     private String categoryQuery(HttpServletRequest servletRequest) {
         List<Category> categoryList = ShopContent.getCategoriesList();
-        servletRequest.setAttribute("categories", categoryList);
+        servletRequest.setAttribute(RequestParamEnum.CATEGORIES.getValue(), categoryList);
+
+        int basketSize = BasketPageCommandImpl.getBasketSize(servletRequest);
+        servletRequest.setAttribute(RequestParamEnum.BASKET_SIZE.getValue(), basketSize);
 
         return PagesPathEnum.HOME_PAGE.getPath();
     }

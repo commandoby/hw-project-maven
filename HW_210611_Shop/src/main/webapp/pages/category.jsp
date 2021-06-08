@@ -17,8 +17,8 @@
 
 <form method="post">
     <div class="container" align="right">
-        <button type="submit" class="btn btn-primary btn-lg" name="command" value="basket">Basket</button>
-        &nbsp
+        <button type="submit" class="btn btn-primary btn-lg" name="command" value="basket">Basket (${basket_size})</button>
+        &nbsp&nbsp
         <button type="submit" class="btn btn-danger btn-lg" name="command" value="sign-in">Escape</button>
     </div>
 
@@ -29,7 +29,7 @@
             <div class="row">
                 <c:forEach items="${categories}" var="category">
                     <button type="submit" class="btn btn-light" style="width:360px;height:260px"
-                            name="category_name" value="${category.getName()}">
+                            name="category_tag" value="${category.getTag()}">
                         <div class="card-body">
                             <h4 class="card-title">${category.getName()}</h4>
                             <img class="card-img" style="height:160px"

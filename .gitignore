@@ -15,5 +15,5 @@ pom.xml
 *.iml
 
 # Other files
-.jpeg
-.png
+*.jpeg
+*.png
