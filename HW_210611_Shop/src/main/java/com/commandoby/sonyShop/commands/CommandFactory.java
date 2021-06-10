@@ -15,6 +15,7 @@ public class CommandFactory {
         COMMAND_LIST.put(CommandsEnum.HOME_PAGE_COMMAND.getCommand(), new HomePageCommandImpl());
         COMMAND_LIST.put(CommandsEnum.PRODUCT_LIST_COMMAND.getCommand(), new ProductListPageCommandImpl());
         COMMAND_LIST.put(CommandsEnum.BASKET_COMMAND.getCommand(), new BasketPageCommandImpl());
+        COMMAND_LIST.put(CommandsEnum.PAY_COMMAND.getCommand(), new PayCommandImpl());
     }
 
     public static BaseCommand defineCommand(HttpServletRequest servletRequest) {

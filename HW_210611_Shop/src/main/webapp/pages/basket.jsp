@@ -17,17 +17,20 @@
 
 <form method="post">
     <div class="container" align="right">
-        <button type="submit" class="btn btn-success btn-lg" name="command" value="pay">&nbsp&nbspPay&nbsp&nbsp</button>
+        <button type="submit" class="btn btn-success btn-lg" name="command" value="pay">&nbsp&nbsp Pay &nbsp&nbsp
+        </button>
         &nbsp&nbsp
         <button type="submit" class="btn btn-primary btn-lg" name="command" value="home_page">Home page</button>
         &nbsp&nbsp
         <button type="submit" class="btn btn-danger btn-lg" name="command" value="sign-in">Escape</button>
     </div>
 
+    <% int id_basket = 0; %>
     <div class="container">
         <input type="hidden" name="command" value="basket"/>
         <br>
-        <h3>There are ${basket_size} products in the basket for the amount of: ${basket_price}</h3>
+        <h3>There are ${basket_size} products in the basket for the amount of:
+            <b style="color: orangered">${basket_price}</b></h3>
         <c:if test="${not empty basket_list}">
             <c:forEach items="${basket_list}" var="product">
                 <div class="media border">
@@ -38,12 +41,13 @@
                         <h4>${product.getName()}&nbsp&nbsp&nbsp<small> Price: </small>
                             <b style="color: orangered">${product.getPrice()}</b></h4>
                         <p class="card-text">${product.getDescription()}</p>
-                        <button type="submit" class="btn btn-primary" name="product_name" value="${product.getName()}">
+                        <button type="submit" class="btn btn-primary" name="remove_id" value="<%=id_basket%>">
                             Remove from basket
                         </button>
                     </div>
                 </div>
                 <br>
+                <% id_basket++; %>
             </c:forEach>
         </c:if>
     </div>

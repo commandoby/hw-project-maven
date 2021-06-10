@@ -26,7 +26,8 @@
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control w-25" id="password" placeholder="Enter password" name="password"
+                <input type="password" class="form-control w-25" id="password" placeholder="Enter password"
+                       name="password"
                        required>
                 <div class="invalid-feedback">Please fill out password field</div>
             </div>

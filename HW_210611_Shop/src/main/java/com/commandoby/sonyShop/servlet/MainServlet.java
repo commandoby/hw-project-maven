@@ -4,6 +4,7 @@ import com.commandoby.sonyShop.commands.BaseCommand;
 import com.commandoby.sonyShop.commands.CommandFactory;
 import com.commandoby.sonyShop.enums.PagesPathEnum;
 import com.commandoby.sonyShop.exceptions.CommandException;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,8 @@ import java.io.IOException;
 
 @WebServlet("/sonyshop")
 public class MainServlet extends HttpServlet {
+    private Logger log = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
@@ -32,7 +35,7 @@ public class MainServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher(path);
             requestDispatcher.forward(req, resp);
         } catch (CommandException e) {
-            System.out.println(e);
+            log.error(e);
             req.getRequestDispatcher("pages/" + PagesPathEnum.SIGN_IN_PAGE.getPath()).forward(req, resp);
         }
     }

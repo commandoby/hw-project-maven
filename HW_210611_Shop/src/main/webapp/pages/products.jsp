@@ -19,7 +19,8 @@
     <div class="container" align="right">
         <button type="submit" class="btn btn-primary btn-lg" name="command" value="home_page">Home page</button>
         &nbsp&nbsp
-        <button type="submit" class="btn btn-primary btn-lg" name="command" value="basket">Basket (${basket_size})</button>
+        <button type="submit" class="btn btn-primary btn-lg" name="command" value="basket">Basket (${basket_size})
+        </button>
         &nbsp&nbsp
         <button type="submit" class="btn btn-danger btn-lg" name="command" value="sign-in">Escape</button>
     </div>
