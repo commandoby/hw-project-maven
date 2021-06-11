@@ -10,7 +10,7 @@ public enum RequestParamEnum {
     PRODUCT_LIST("product_list"),
     PRODUCT_SIZE("product_size"),
     PRODUCT_ADD_NAME("product_name"),
-    BASKET_LIST("basket_list"),
+    BASKET("basket"),
     BASKET_SIZE("basket_size"),
     BASKET_PRICE("basket_price"),
     REMOVE_PRODUCT_ID("remove_id");

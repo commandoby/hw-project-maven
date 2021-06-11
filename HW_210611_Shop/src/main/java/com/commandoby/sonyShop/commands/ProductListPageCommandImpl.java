@@ -1,10 +1,9 @@
 package com.commandoby.sonyShop.commands;
 
+import com.commandoby.sonyShop.classies.Basket;
 import com.commandoby.sonyShop.classies.Category;
 import com.commandoby.sonyShop.classies.Product;
 import com.commandoby.sonyShop.classies.ShopContent;
-import com.commandoby.sonyShop.enums.PagesPathEnum;
-import com.commandoby.sonyShop.enums.RequestParamEnum;
 import com.commandoby.sonyShop.exceptions.CommandException;
 import com.commandoby.sonyShop.exceptions.NoFoundException;
 import org.apache.log4j.Logger;
@@ -14,21 +13,24 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.commandoby.sonyShop.enums.PagesPathEnum.PRODUCTS_LIST_PAGE;
+import static com.commandoby.sonyShop.enums.RequestParamEnum.*;
+
 public class ProductListPageCommandImpl implements BaseCommand {
     private Logger log = Logger.getLogger(getClass().getName());
 
     @Override
     public String execute(HttpServletRequest servletRequest) throws CommandException {
-        String categoryTag = servletRequest.getParameter(RequestParamEnum.CATEGORY_TAG.getValue());
+        String categoryTag = servletRequest.getParameter(CATEGORY_TAG.getValue());
 
         try {
-            servletRequest.setAttribute(RequestParamEnum.CATEGORY_TAG.getValue(), categoryTag);
-            servletRequest.setAttribute(RequestParamEnum.CATEGORY_NAME.getValue(), searchCategoryName(categoryTag));
+            servletRequest.setAttribute(CATEGORY_TAG.getValue(), categoryTag);
+            servletRequest.setAttribute(CATEGORY_NAME.getValue(), searchCategoryName(categoryTag));
 
             int productSize = getProductList(servletRequest, categoryTag);
-            servletRequest.setAttribute(RequestParamEnum.PRODUCT_SIZE.getValue(), productSize);
+            servletRequest.setAttribute(PRODUCT_SIZE.getValue(), productSize);
 
-            String productAddName = servletRequest.getParameter(RequestParamEnum.PRODUCT_ADD_NAME.getValue());
+            String productAddName = servletRequest.getParameter(PRODUCT_ADD_NAME.getValue());
             if (productAddName != null) {
                 addProductToBasket(servletRequest, productAddName);
             }
@@ -37,9 +39,9 @@ public class ProductListPageCommandImpl implements BaseCommand {
         }
 
         int basketSize = BasketPageCommandImpl.getBasketSize(servletRequest);
-        servletRequest.setAttribute(RequestParamEnum.BASKET_SIZE.getValue(), basketSize);
+        servletRequest.setAttribute(BASKET_SIZE.getValue(), basketSize);
 
-        return PagesPathEnum.PRODUCTS_LIST_PAGE.getPath();
+        return PRODUCTS_LIST_PAGE.getPath();
     }
 
     private String searchCategoryName(String tag) throws NoFoundException {
@@ -55,20 +57,18 @@ public class ProductListPageCommandImpl implements BaseCommand {
             if (product.getCategories().getTag().equals(tag)) productList.add(product);
         }
 
-        servletRequest.setAttribute(RequestParamEnum.PRODUCT_LIST.getValue(), productList);
+        servletRequest.setAttribute(PRODUCT_LIST.getValue(), productList);
 
         return productList.size();
     }
 
     private void addProductToBasket(HttpServletRequest servletRequest, String productName) throws NoFoundException {
         HttpSession session = servletRequest.getSession();
-        List<Product> productList = (List<Product>) session.getAttribute(RequestParamEnum.BASKET_LIST.getValue());
+        Basket basket = (Basket) session.getAttribute(BASKET.getValue());
         Product product = getProduct(productName);
-        if (productList == null) {
-            productList = new ArrayList<>();
-        }
-        productList.add(product);
-        session.setAttribute(RequestParamEnum.BASKET_LIST.getValue(), productList);
+        if (basket == null) basket = new Basket();
+        basket.addProduct(product);
+        session.setAttribute(BASKET.getValue(), basket);
     }
 
     private Product getProduct(String productName) throws NoFoundException {

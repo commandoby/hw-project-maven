@@ -2,7 +2,6 @@ package com.commandoby.sonyShop.servlet;
 
 import com.commandoby.sonyShop.commands.BaseCommand;
 import com.commandoby.sonyShop.commands.CommandFactory;
-import com.commandoby.sonyShop.enums.PagesPathEnum;
 import com.commandoby.sonyShop.exceptions.CommandException;
 import org.apache.log4j.Logger;
 
@@ -13,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static com.commandoby.sonyShop.enums.PagesPathEnum.SIGN_IN_PAGE;
 
 @WebServlet("/sonyshop")
 public class MainServlet extends HttpServlet {
@@ -36,7 +37,7 @@ public class MainServlet extends HttpServlet {
             requestDispatcher.forward(req, resp);
         } catch (CommandException e) {
             log.error(e);
-            req.getRequestDispatcher("pages/" + PagesPathEnum.SIGN_IN_PAGE.getPath()).forward(req, resp);
+            req.getRequestDispatcher("pages/" + SIGN_IN_PAGE.getPath()).forward(req, resp);
         }
     }
 }

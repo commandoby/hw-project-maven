@@ -1,14 +1,14 @@
 package com.commandoby.sonyShop.commands;
 
-import com.commandoby.sonyShop.classies.Product;
-import com.commandoby.sonyShop.enums.PagesPathEnum;
-import com.commandoby.sonyShop.enums.RequestParamEnum;
+import com.commandoby.sonyShop.classies.Basket;
 import com.commandoby.sonyShop.exceptions.CommandException;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+
+import static com.commandoby.sonyShop.enums.PagesPathEnum.PAY_PAGE;
+import static com.commandoby.sonyShop.enums.RequestParamEnum.*;
 
 public class PayCommandImpl implements BaseCommand {
     private Logger log = Logger.getLogger(getClass().getName());
@@ -17,33 +17,23 @@ public class PayCommandImpl implements BaseCommand {
     public String execute(HttpServletRequest servletRequest) throws CommandException {
         int paySize = 0;
         int payPrice = 0;
-        List<Product> basketList = getBasketList(servletRequest);
+        Basket basket = getBasketList(servletRequest);
 
-        if (basketList != null && !basketList.isEmpty()) {
-            paySize = basketList.size();
-            payPrice = sumPrice(basketList);
-        }
+        paySize = basket.getProductList().size();
+        payPrice = basket.getBasketPrice();
 
-        servletRequest.setAttribute(RequestParamEnum.BASKET_SIZE.getValue(), paySize);
-        servletRequest.setAttribute(RequestParamEnum.BASKET_PRICE.getValue(), payPrice);
+        servletRequest.setAttribute(BASKET_SIZE.getValue(), paySize);
+        servletRequest.setAttribute(BASKET_PRICE.getValue(), payPrice);
 
         log.info("Purchased " + paySize + " products.");
 
-        return PagesPathEnum.PAY_PAGE.getPath();
+        return PAY_PAGE.getPath();
     }
 
-    private List<Product> getBasketList(HttpServletRequest servletRequest) {
+    private Basket getBasketList(HttpServletRequest servletRequest) {
         HttpSession session = servletRequest.getSession();
-        List<Product> productList = (List<Product>) session.getAttribute(RequestParamEnum.BASKET_LIST.getValue());
-        session.setAttribute(RequestParamEnum.BASKET_LIST.getValue(), null);
-        return productList;
-    }
-
-    private int sumPrice(List<Product> basketList) {
-        int sumPrice = 0;
-        for (Product product : basketList) {
-            sumPrice += product.getPrice();
-        }
-        return sumPrice;
+        Basket basket = (Basket) session.getAttribute(BASKET.getValue());
+        session.setAttribute(BASKET.getValue(), new Basket());
+        return basket;
     }
 }

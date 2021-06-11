@@ -1,3 +1,6 @@
+<%@ page import="com.commandoby.sonyShop.classies.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.commandoby.sonyShop.classies.Basket" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
@@ -25,14 +28,18 @@
         <button type="submit" class="btn btn-danger btn-lg" name="command" value="sign-in">Escape</button>
     </div>
 
-    <% int id_basket = 0; %>
+    <%
+        int id_basket = 0;
+        Basket basket = (Basket) session.getAttribute("basket");
+        if (basket == null) basket = new Basket();
+    %>
     <div class="container">
         <input type="hidden" name="command" value="basket"/>
         <br>
         <h3>There are ${basket_size} products in the basket for the amount of:
             <b style="color: orangered">${basket_price}</b></h3>
-        <c:if test="${not empty basket_list}">
-            <c:forEach items="${basket_list}" var="product">
+        <c:if test="${not empty basket}">
+            <c:forEach items="<%= basket.getProductList() %>" var="product">
                 <div class="media border">
                     <img class="card-img p-3" style="max-width:220px;max-height: 360px"
                          src="${contextPath}/images/${product.getCategories().getTag()}/${product.getImageName()}"
@@ -41,7 +48,7 @@
                         <h4>${product.getName()}&nbsp&nbsp&nbsp<small> Price: </small>
                             <b style="color: orangered">${product.getPrice()}</b></h4>
                         <p class="card-text">${product.getDescription()}</p>
-                        <button type="submit" class="btn btn-primary" name="remove_id" value="<%=id_basket%>">
+                        <button type="submit" class="btn btn-primary" name="remove_id" value="<%= id_basket %>">
                             Remove from basket
                         </button>
                     </div>
