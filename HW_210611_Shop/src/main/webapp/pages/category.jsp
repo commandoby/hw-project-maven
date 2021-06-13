@@ -16,11 +16,19 @@
 <h2 align="center">Shop products of Sony.</h2>
 
 <form method="post">
-    <div class="container" align="right">
-        <button type="submit" class="btn btn-primary btn-lg" name="command" value="basket">Basket (${basket_size})
-        </button>
-        &nbsp&nbsp
-        <button type="submit" class="btn btn-danger btn-lg" name="command" value="sign-in">Escape</button>
+    <div class="container">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button type="submit" class="btn btn-primary" name="command" value="home_page">Search</button>
+            </div>
+            <input type="text" class="form-control w-25" id="search_value" placeholder="Enter name" name="search_value">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary" name="command" value="basket">Basket
+                    (${basket_size})
+                </button>
+                <button type="submit" class="btn btn-danger" name="command" value="sign-in">Escape</button>
+            </div>
+        </div>
     </div>
 
     <div class="container" method="post" align="center">

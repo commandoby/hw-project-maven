@@ -13,7 +13,8 @@ public enum RequestParamEnum {
     BASKET("basket"),
     BASKET_SIZE("basket_size"),
     BASKET_PRICE("basket_price"),
-    REMOVE_PRODUCT_ID("remove_id");
+    REMOVE_PRODUCT_ID("remove_id"),
+    SEARCH_VALUE("search_value");
 
     private final String value;
 

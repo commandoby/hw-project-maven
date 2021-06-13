@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Products list</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h2 align="center">List products category: CCCCCCCCC</h2>
+
+<form method="post">
+    <div class="container">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button type="submit" class="btn btn-primary" name="command" value="search">Search</button>
+            </div>
+            <input type="text" class="form-control" id="search_value" placeholder="Enter name" name="search_value">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary" name="command" value="home_page">Home page</button>
+                <button type="submit" class="btn btn-primary" name="command" value="basket">Basket (99)
+                </button>
+                <button type="submit" class="btn btn-danger" name="command" value="sign-in">Escape</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <input type="hidden" name="category_tag" value="werhsrt"/>
+        <input type="hidden" name="command" value="product_list"/>
+        <br>
+        <p>Found 63 products.</p>
+        <div class="media border">
+            <img class="card-img p-3" style="max-width:220px;max-height: 360px"
+                 src="tv.jpeg"
+                 alt="Card image">
+            <div class="media-body">
+                <h4>AAAAAAAAAA&nbsp&nbsp&nbsp<small> Price: </small>
+                    <b style="color: orangered">5555555</b></h4>
+                <p class="card-text">ersrenxfgfmdtymfgh,h,</p>
+                <button type="submit" class="btn btn-primary" name="product_name" value="${product.getName()}">
+                    Add to basket
+                </button>
+            </div>
+        </div>
+        <br>
+    </div>
+</form>
+</body>
+</html>

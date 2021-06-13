@@ -2,7 +2,7 @@ package com.commandoby.sonyShop.classies;
 
 import java.util.Objects;
 
-public class Product {
+public class Product implements ShopObject{
     private String name;
     private String imageName;
     private Category categories;

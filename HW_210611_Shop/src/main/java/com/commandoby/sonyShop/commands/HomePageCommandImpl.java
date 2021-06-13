@@ -4,6 +4,7 @@ import com.commandoby.sonyShop.classies.Category;
 import com.commandoby.sonyShop.classies.ShopContent;
 import com.commandoby.sonyShop.classies.User;
 import com.commandoby.sonyShop.exceptions.CommandException;
+import com.commandoby.sonyShop.search.Search;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,13 +46,22 @@ public class HomePageCommandImpl implements BaseCommand {
     }
 
     private String categoryQuery(HttpServletRequest servletRequest) {
-        List<Category> categoryList = ShopContent.getCategoriesList();
+        List<Category> categoryList = getSearchCategory(servletRequest, ShopContent.getCategoriesList());
         servletRequest.setAttribute(CATEGORIES.getValue(), categoryList);
 
         int basketSize = BasketPageCommandImpl.getBasketSize(servletRequest);
         servletRequest.setAttribute(BASKET_SIZE.getValue(), basketSize);
 
         return HOME_PAGE.getPath();
+    }
+
+    private List<Category> getSearchCategory(HttpServletRequest servletRequest, List<Category> categoryList) {
+        String searchValue = servletRequest.getParameter(SEARCH_VALUE.getValue());
+        if (searchValue != null && !searchValue.equals("")) {
+            Search<Category> search = new Search<>();
+            return search.searchName(searchValue, categoryList);
+        }
+        return categoryList;
     }
 
     private boolean checkReceivedUser(User user) {

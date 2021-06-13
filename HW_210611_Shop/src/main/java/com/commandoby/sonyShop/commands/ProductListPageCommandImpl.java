@@ -6,6 +6,7 @@ import com.commandoby.sonyShop.classies.Product;
 import com.commandoby.sonyShop.classies.ShopContent;
 import com.commandoby.sonyShop.exceptions.CommandException;
 import com.commandoby.sonyShop.exceptions.NoFoundException;
+import com.commandoby.sonyShop.search.Search;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +28,7 @@ public class ProductListPageCommandImpl implements BaseCommand {
             servletRequest.setAttribute(CATEGORY_TAG.getValue(), categoryTag);
             servletRequest.setAttribute(CATEGORY_NAME.getValue(), searchCategoryName(categoryTag));
 
-            int productSize = getProductList(servletRequest, categoryTag);
-            servletRequest.setAttribute(PRODUCT_SIZE.getValue(), productSize);
+            getProductList(servletRequest, categoryTag);
 
             String productAddName = servletRequest.getParameter(PRODUCT_ADD_NAME.getValue());
             if (productAddName != null) {
@@ -51,15 +51,24 @@ public class ProductListPageCommandImpl implements BaseCommand {
         throw new NoFoundException("Category: " + tag + " not found.");
     }
 
-    private int getProductList(HttpServletRequest servletRequest, String tag) {
+    private void getProductList(HttpServletRequest servletRequest, String tag) {
         List<Product> productList = new ArrayList<>();
         for (Product product : ShopContent.getProductList()) {
             if (product.getCategories().getTag().equals(tag)) productList.add(product);
         }
 
-        servletRequest.setAttribute(PRODUCT_LIST.getValue(), productList);
+        List<Product> newProductList = getSearchProductList(servletRequest, productList);
+        servletRequest.setAttribute(PRODUCT_LIST.getValue(), newProductList);
+        servletRequest.setAttribute(PRODUCT_SIZE.getValue(), newProductList.size());
+    }
 
-        return productList.size();
+    private List<Product> getSearchProductList(HttpServletRequest servletRequest, List<Product> productList) {
+        String searchValue = servletRequest.getParameter(SEARCH_VALUE.getValue());
+        if (searchValue != null && !searchValue.equals("")) {
+            Search<Product> search = new Search<>();
+            return search.searchName(searchValue, productList);
+        }
+        return productList;
     }
 
     private void addProductToBasket(HttpServletRequest servletRequest, String productName) throws NoFoundException {

@@ -20,12 +20,12 @@
 
 <form method="post">
     <div class="container" align="right">
-        <button type="submit" class="btn btn-success btn-lg" name="command" value="pay">&nbsp&nbsp Pay &nbsp&nbsp
-        </button>
-        &nbsp&nbsp
-        <button type="submit" class="btn btn-primary btn-lg" name="command" value="home_page">Home page</button>
-        &nbsp&nbsp
-        <button type="submit" class="btn btn-danger btn-lg" name="command" value="sign-in">Escape</button>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-success" name="command" value="pay">&nbsp&nbsp Pay &nbsp&nbsp
+                </button>
+                <button type="submit" class="btn btn-primary" name="command" value="home_page">Home page</button>
+                <button type="submit" class="btn btn-danger" name="command" value="sign-in">Escape</button>
+            </div>
     </div>
 
     <%

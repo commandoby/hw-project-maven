@@ -16,13 +16,19 @@
 <h2 align="center">List products category: ${category_name}</h2>
 
 <form method="post">
-    <div class="container" align="right">
-        <button type="submit" class="btn btn-primary btn-lg" name="command" value="home_page">Home page</button>
-        &nbsp&nbsp
-        <button type="submit" class="btn btn-primary btn-lg" name="command" value="basket">Basket (${basket_size})
-        </button>
-        &nbsp&nbsp
-        <button type="submit" class="btn btn-danger btn-lg" name="command" value="sign-in">Escape</button>
+    <div class="container">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button type="submit" class="btn btn-primary" name="command" value="product_list">Search</button>
+            </div>
+            <input type="text" class="form-control w-25" id="search_value" placeholder="Enter name" name="search_value">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary" name="command" value="home_page">Home page</button>
+                <button type="submit" class="btn btn-primary" name="command" value="basket">Basket (${basket_size})
+                </button>
+                <button type="submit" class="btn btn-danger" name="command" value="sign-in">Escape</button>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -40,7 +46,8 @@
                         <h4>${product.getName()}&nbsp&nbsp&nbsp<small> Price: </small>
                             <b style="color: orangered">${product.getPrice()}</b></h4>
                         <p class="card-text">${product.getDescription()}</p>
-                        <button type="submit" class="btn btn-primary" name="product_name" value="${product.getName()}">
+                        <button type="submit" class="btn btn-primary" name="product_name"
+                                value="${product.getName()}">
                             Add to basket
                         </button>
                     </div>
