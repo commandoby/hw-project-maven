@@ -30,7 +30,7 @@ public class ProductListPageCommandImpl implements BaseCommand {
 
             getProductList(servletRequest, categoryTag);
 
-            String productAddName = servletRequest.getParameter(PRODUCT_ADD_NAME.getValue());
+            String productAddName = servletRequest.getParameter(PRODUCT_NAME.getValue());
             if (productAddName != null) {
                 addProductToBasket(servletRequest, productAddName);
             }

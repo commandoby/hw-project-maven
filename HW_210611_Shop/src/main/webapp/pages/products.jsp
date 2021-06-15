@@ -30,14 +30,16 @@
             </div>
         </div>
     </div>
+</form>
 
-    <div class="container">
-        <input type="hidden" name="category_tag" value="${category_tag}"/>
-        <input type="hidden" name="command" value="product_list"/>
-        <br>
-        <p>Found ${product_size} products.</p>
-        <c:if test="${not empty product_list}">
-            <c:forEach items="${product_list}" var="product">
+<div class="container">
+    <br>
+    <p>Found ${product_size} products.</p>
+    <c:if test="${not empty product_list}">
+        <c:forEach items="${product_list}" var="product">
+            <form method="post">
+                <input type="hidden" name="category_tag" value="${category_tag}"/>
+                <input type="hidden" name="product_name" value="${product.getName()}"/>
                 <div class="media border">
                     <img class="card-img p-3" style="max-width:220px;max-height: 360px"
                          src="${contextPath}/images/${category_tag}/${product.getImageName()}"
@@ -46,16 +48,20 @@
                         <h4>${product.getName()}&nbsp&nbsp&nbsp<small> Price: </small>
                             <b style="color: orangered">${product.getPrice()}</b></h4>
                         <p class="card-text">${product.getDescription()}</p>
-                        <button type="submit" class="btn btn-primary" name="product_name"
-                                value="${product.getName()}">
+                        <button type="submit" class="btn btn-primary"
+                                name="command" value="product">
+                            List of product
+                        </button>
+                        <button type="submit" class="btn btn-primary"
+                                name="command" value="product_list">
                             Add to basket
                         </button>
                     </div>
                 </div>
-                <br>
-            </c:forEach>
-        </c:if>
-    </div>
-</form>
+            </form>
+            <br>
+        </c:forEach>
+    </c:if>
+</div>
 </body>
 </html>
