@@ -23,20 +23,22 @@ public class HomePageCommandImpl implements BaseCommand {
     public String execute(HttpServletRequest servletRequest) throws CommandException {
         HttpSession session = servletRequest.getSession();
 
-        String login = (String) session.getAttribute(LOGIN.getValue());
+        String email = (String) session.getAttribute(EMAIL.getValue());
         String password = (String) session.getAttribute(PASSWORD.getValue());
 
-        User user = new User(login, password);
-        if (validateParamNotNull(login) && validateParamNotNull(password) && checkReceivedUser(user)) {
+//        User user = new User(null, null, email, password, null);
+        User user = User.newBuilder().withEmail(email).withPassword(password).build();
+        if (validateParamNotNull(email) && validateParamNotNull(password) && checkReceivedUser(user)) {
             return categoryQuery(servletRequest);
         }
 
-        login = servletRequest.getParameter(LOGIN.getValue());
+        email = servletRequest.getParameter(EMAIL.getValue());
         password = servletRequest.getParameter(PASSWORD.getValue());
 
-        user = new User(login, password);
-        if (validateParamNotNull(login) && validateParamNotNull(password) && checkReceivedUser(user)) {
-            session.setAttribute(LOGIN.getValue(), login);
+//        user = new User(null, null, email, password, null);
+        user = User.newBuilder().withEmail(email).withPassword(password).build();
+        if (validateParamNotNull(email) && validateParamNotNull(password) && checkReceivedUser(user)) {
+            session.setAttribute(EMAIL.getValue(), email);
             session.setAttribute(PASSWORD.getValue(), password);
 
             return categoryQuery(servletRequest);
@@ -65,9 +67,15 @@ public class HomePageCommandImpl implements BaseCommand {
     }
 
     private boolean checkReceivedUser(User user) {
-        if (user != null && user.getName().equals(ADMIN_LOGIN)
+        /*if (user != null && user.getName().equals(ADMIN_LOGIN)
                 && user.getPassword().equals(ADMIN_PASSWORD)) {
             return true;
+        }*/
+        if (user != null) {
+            for (User u : ShopContent.getUserList()) {
+                if (user.getEmail().equals(u.getEmail()) && user.getPassword().equals(u.getPassword()))
+                    return true;
+            }
         }
         return false;
     }

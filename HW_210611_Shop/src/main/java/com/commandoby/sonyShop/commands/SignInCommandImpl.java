@@ -12,7 +12,7 @@ public class SignInCommandImpl implements BaseCommand {
     @Override
     public String execute(HttpServletRequest servletRequest) throws CommandException {
         HttpSession session = servletRequest.getSession();
-        session.setAttribute(LOGIN.getValue(), "");
+        session.setAttribute(EMAIL.getValue(), "");
         session.setAttribute(PASSWORD.getValue(), "");
         return SIGN_IN_PAGE.getPath();
     }

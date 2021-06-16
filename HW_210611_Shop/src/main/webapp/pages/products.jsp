@@ -16,6 +16,7 @@
 <h2 align="center">List products category: ${category_name}</h2>
 
 <form method="post">
+    <input type="hidden" name="category_tag" value="${category_tag}"/>
     <div class="container">
         <div class="input-group mb-3">
             <div class="input-group-prepend">

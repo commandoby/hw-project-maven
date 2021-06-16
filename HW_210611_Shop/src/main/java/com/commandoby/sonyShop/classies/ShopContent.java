@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShopContent {
+    private static List<User> userList = new ArrayList<>();
     private static final List<Category> categoriesList = new ArrayList<>();
     private static final List<Product> productList = new ArrayList<>();
     private static final Category phone = new Category("Phone", "phone.jpeg", "phone");
@@ -14,6 +15,8 @@ public class ShopContent {
     private static final Category memoryCard = new Category("Memory card", "memcard.jpeg", "memcard");
 
     static {
+        userList.add(new User("Admin", "Admin", "admin", "admin", "1980-01-01"));
+
         categoriesList.add(phone);
         categoriesList.add(mp3Player);
         categoriesList.add(headphones);
@@ -173,5 +176,9 @@ public class ShopContent {
 
     public static List<Product> getProductList() {
         return productList;
+    }
+
+    public static List<User> getUserList() {
+        return userList;
     }
 }

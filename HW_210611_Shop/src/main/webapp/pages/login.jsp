@@ -20,7 +20,7 @@
             <input type="hidden" name="command" value="home_page"/>
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control w-25" id="username" placeholder="Enter username" name="username"
+                <input type="text" class="form-control w-25" id="email" placeholder="Enter username" name="email"
                        required>
                 <div class="invalid-feedback">Please fill out username field</div>
             </div>
