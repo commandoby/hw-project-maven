@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.commandoby.university.Sex.*;
+
 public class StudentTests {
     private static Student student1;
     private static Student student2;
@@ -17,9 +19,9 @@ public class StudentTests {
 
     @BeforeClass
     public static void setUp() {
-        student1 = new Student("Ivan", 17, Sex.MALE);
-        student2 = new Student("Anna", 19, Sex.FEMALE);
-        student3 = new Student("Polina", 18, Sex.FEMALE);
+        student1 = new Student("Ivan", 17, MALE);
+        student2 = new Student("Anna", 19, FEMALE);
+        student3 = new Student("Polina", 18, FEMALE);
 
         actual = new ArrayList<>();
         actual.add(student1);
@@ -44,13 +46,13 @@ public class StudentTests {
 
     @Test
     public void checkGetAllUsers_MALE() {
-        List<Student> expected = Student.getAllStudentsBySex(Sex.MALE);
+        List<Student> expected = Student.getAllStudentsBySex(MALE);
         Assert.assertEquals(actualBySex, expected);
     }
 
     @Test
     public void checkGetAllUsers_FEMALE_NotNull() {
-        List<Student> expected = Student.getAllStudentsBySex(Sex.FEMALE);
+        List<Student> expected = Student.getAllStudentsBySex(FEMALE);
         Assert.assertNotNull(expected);
     }
 
@@ -62,7 +64,7 @@ public class StudentTests {
 
     @Test
     public void checkGetStudentsCount_MALE() {
-        int expected = Student.getStudentsCountWitSex(Sex.MALE);
+        int expected = Student.getStudentsCountWitSex(MALE);
         Assert.assertEquals(1, expected);
     }
 
@@ -80,7 +82,7 @@ public class StudentTests {
 
     @Test
     public void checkGetSumOfAllStudentsAge_FEMALE() {
-        int expected = Student.getSumOfAllStudentsAgeBySex(Sex.FEMALE);
+        int expected = Student.getSumOfAllStudentsAgeBySex(FEMALE);
         Assert.assertEquals(37, expected);
     }
 
@@ -92,13 +94,13 @@ public class StudentTests {
 
     @Test
     public void checkGetAverageAgeOfAllUsers_MALE() {
-        int expected = Student.getAverageAgeOfAllUsersBySex(Sex.MALE);
+        int expected = Student.getAverageAgeOfAllUsersBySex(MALE);
         Assert.assertEquals(17, expected);
     }
 
     @Test
     public void checkGetAverageAgeOfAllUsers_FEMALE_Positive() {
-        boolean expected = Student.getAverageAgeOfAllUsersBySex(Sex.FEMALE) > 0;
+        boolean expected = Student.getAverageAgeOfAllUsersBySex(FEMALE) > 0;
         Assert.assertTrue(expected);
     }
 
